@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './FileSharing.css';
 const FileSharing = () => {
     return (
         <div className="file-sharing">

@@ -1,20 +1,20 @@
 /* General Layout */
 .dashboard {
     display: flex;
-    background-color: #f8f9fa; /* Light gray background */
+    background-color: #e9ecef; /* Light gray background */
     height: 100vh;
     color: #333;
 }
 
 .main-content {
     flex: 1;
-    padding: 24px;
+    padding: 30px;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    background-color: #fff;
+    background-color: #ffffff; /* White background */
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     margin: 20px;
 }
 
@@ -29,6 +29,13 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+/* User Info */
+.user-info {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5em;
 }
 
 /* Start & Stop Meeting Buttons */
@@ -71,58 +78,13 @@
     transform: translateY(-2px);
 }
 
-/* Video Call Styling */
-.video-call {
-    grid-column: span 2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    background: white;
-    margin-top: 20px;
-}
-
-.video-call video {
-    width: 48%;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s;
-}
-
-.video-call video:hover {
-    transform: scale(1.02);
-}
-
-/* Chat Box */
-.chat {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 300px;
-    height: 400px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .dashboard-content {
         grid-template-columns: 1fr;
     }
 
-    .start-meeting-button, .stop-meeting-button {
-        width: 100%;
-    }
-
-    .video-call {
+    .action-buttons {
         flex-direction: column;
-    }
-
-    .video-call video {
-        width: 100%;
-        margin-bottom: 10px;
     }
 }

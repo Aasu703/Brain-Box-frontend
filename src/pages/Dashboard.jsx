@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar/Sidebar";
 import Header from "../components/Header/Header";
 import TodayTasks from "../components/TodayTasks/TodayTasks";
@@ -11,6 +11,14 @@ import "../css/Dashboard.css";
 
 const Dashboard = () => {
     const [isVideoCallActive, setIsVideoCallActive] = useState(false);
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
+    }, []);
 
     const toggleVideoCall = () => {
         setIsVideoCallActive(!isVideoCallActive);
@@ -21,6 +29,13 @@ const Dashboard = () => {
             <Sidebar />
             <div className="main-content">
                 <Header />
+                <div className="user-info">
+                    {user ? (
+                        <h2>Welcome, {user.Email} ({user.Role})</h2>
+                    ) : (
+                        <h2>Welcome, Guest</h2>
+                    )}
+                </div>
                 <div className="dashboard-content">
                     <div className="left-panel">
                         <TodayTasks />
@@ -33,10 +48,7 @@ const Dashboard = () => {
                 </div>
 
                 <div className="action-buttons">
-                    <button 
-                        onClick={toggleVideoCall} 
-                        className={isVideoCallActive ? "stop-meeting-button" : "start-meeting-button"}
-                    >
+                    <button onClick={toggleVideoCall} className={isVideoCallActive ? "stop-meeting-button" : "start-meeting-button"}>
                         {isVideoCallActive ? "Stop Meeting" : "Start Meeting"}
                     </button>
                 </div>

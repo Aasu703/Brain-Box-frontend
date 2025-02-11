@@ -1,61 +1,66 @@
 import React, { useState } from 'react';
-import '../css/Auth.css'; // Importing styles
+import { useNavigate } from 'react-router-dom';
+import { signup } from '../services/api'; // API function to call backend
+import '../css/Auth.css'; // Add CSS for better UI
 
 const Signup = () => {
-    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [role, setRole] = useState('');
+    const [message, setMessage] = useState('');
+    const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSignup = async (e) => {
         e.preventDefault();
-        console.log('Signing up with:', { username, email, password });
+        try {
+            const userData = { Email: email, Password: password, Role: role };
+            const response = await signup(userData);
+            setMessage(response.message);
+
+            // Save user data in localStorage
+            localStorage.setItem('user', JSON.stringify(response.user));
+
+            // Redirect to Dashboard
+            navigate('/dashboard');
+        } catch (error) {
+            setMessage(error.response?.data?.error || 'Signup failed');
+        }
     };
 
     return (
-        <div className="signup-page">
-            <div className="signup-container">
-                <h2>Create an account</h2>
-                <form onSubmit={handleSubmit}>
-                    <input 
-                        type="text" 
-                        placeholder="Username" 
-                        value={username} 
-                        onChange={(e) => setUsername(e.target.value)} 
-                        required 
+        <div className="auth-container">
+            <div className="auth-box">
+                <h1 className="auth-title">Signup</h1>
+                <form onSubmit={handleSignup} className="auth-form">
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        className="auth-input"
                     />
-                    <input 
-                        type="email" 
-                        placeholder="Email" 
-                        value={email} 
-                        onChange={(e) => setEmail(e.target.value)} 
-                        required 
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        className="auth-input"
                     />
-                    <input 
-                        type="password" 
-                        placeholder="Password" 
-                        value={password} 
-                        onChange={(e) => setPassword(e.target.value)} 
-                        required 
-                    />
-                    <input 
-                        type="password" 
-                        placeholder="Confirm Password" 
-                        value={confirmPassword} 
-                        onChange={(e) => setConfirmPassword(e.target.value)} 
-                        required 
-                    />
-                    <div className="terms">
-                        <input type="checkbox" required />
-                        <label> I agree to the Terms & Conditions</label>
-                    </div>
-                    <button type="submit">Create account</button>
+                    <select
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)}
+                        required
+                        className="auth-input"
+                    >
+                        <option value="">Select Role</option>
+                        <option value="Student">Student</option>
+                        <option value="Teacher">Teacher</option>
+                    </select>
+                    <button type="submit" className="auth-button">Signup</button>
                 </form>
-                <div className="social-login">
-                    <button className="google">Sign up with Google</button>
-                    <button className="apple">Sign up with Apple</button>
-                </div>
-                <p>Already have an account? <a href="/login">Login</a></p>
+                {message && <p className="auth-message">{message}</p>}
             </div>
         </div>
     );

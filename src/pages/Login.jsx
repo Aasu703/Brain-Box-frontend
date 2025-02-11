@@ -1,41 +1,57 @@
 import React, { useState } from 'react';
-import '../css/Auth.css'; // Importing styles
+import { useNavigate } from 'react-router-dom';
+import { login } from '../services/api';
+import '../css/Auth.css';
+import { jwtDecode } from 'jwt-decode'; 
 
 const Login = () => {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [message, setMessage] = useState('');
+    const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        console.log('Logging in with:', { username, password });
+        try {
+            const userData = { Email: email, Password: password };
+            const response = await login(userData);
+
+            // Save token & decode user info
+            localStorage.setItem('token', response.token);
+            const decodedUser = jwtDecode(response.token);
+            localStorage.setItem('user', JSON.stringify(decodedUser));
+
+            setMessage('Login successful!');
+            navigate('/dashboard'); // Redirect to Dashboard
+        } catch (error) {
+            setMessage(error.response?.data?.error || 'Login failed');
+        }
     };
 
     return (
-        <div className="login-page">
-            <div className="login-container">
-                <h2>Login</h2>
-                <form onSubmit={handleSubmit}>
-                    <input 
-                        type="text" 
-                        placeholder="Username" 
-                        value={username} 
-                        onChange={(e) => setUsername(e.target.value)} 
-                        required 
+        <div className="auth-container">
+            <div className="auth-box">
+                <h1 className="auth-title">Login</h1>
+                <form onSubmit={handleLogin} className="auth-form">
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        className="auth-input"
                     />
-                    <input 
-                        type="password" 
-                        placeholder="Password" 
-                        value={password} 
-                        onChange={(e) => setPassword(e.target.value)} 
-                        required 
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        className="auth-input"
                     />
-                    <button type="submit">Login</button>
+                    <button type="submit" className="auth-button">Login</button>
                 </form>
-                <div className="social-login">
-                    <button className="google">Sign in with Google</button>
-                    <button className="apple">Sign in with Apple</button>
-                </div>
-                <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+                {message && <p className="auth-message">{message}</p>}
             </div>
         </div>
     );

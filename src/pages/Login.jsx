@@ -1,27 +1,25 @@
-// src/pages/Login.jsx
 import React, { useState } from 'react';
-import './Auth.css'; // Importing styles
+import '../pages/Auth.css'; // Importing styles
 
 const Login = () => {
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle login logic here
-        console.log('Logging in with:', { email, password });
+        console.log('Logging in with:', { username, password });
     };
 
     return (
         <div className="login-page">
             <div className="login-container">
-                <h2>Create an account</h2>
+                <h2>Login</h2>
                 <form onSubmit={handleSubmit}>
                     <input 
-                        type="email" 
-                        placeholder="Email" 
-                        value={email} 
-                        onChange={(e) => setEmail(e.target.value)} 
+                        type="text" 
+                        placeholder="Username" 
+                        value={username} 
+                        onChange={(e) => setUsername(e.target.value)} 
                         required 
                     />
                     <input 
@@ -31,17 +29,13 @@ const Login = () => {
                         onChange={(e) => setPassword(e.target.value)} 
                         required 
                     />
-                    <div className="terms">
-                        <input type="checkbox" required />
-                        <label> I agree to the Terms & Conditions</label>
-                    </div>
-                    <button type="submit">Create account</button>
+                    <button type="submit">Login</button>
                 </form>
                 <div className="social-login">
                     <button className="google">Sign in with Google</button>
                     <button className="apple">Sign in with Apple</button>
                 </div>
-                <p>Already have an account? <a href="/login">Login</a></p>
+                <p>Don't have an account? <a href="/signup">Sign Up</a></p>
             </div>
         </div>
     );

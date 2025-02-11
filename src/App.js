@@ -1,24 +1,21 @@
 import React from 'react';
-import AppRoutes from './routes/AppRoutes';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/Header/Header';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import Dashboard from './pages/Dashboard';
 
 const App = () => {
     return (
-        <div className="app">
-            <AppRoutes />
-            {/* Add your custom app layout or components here */}
-            {/* Example:
-            <header>
-                <h1>My App</h1>
-            </header>
-            <main>
-                <Route path="/" exact component={Home} />
-                <Route path="/about" component={About} />
-            </main>
-            */}
-       
-
-        </div>
+        <Router>
+            <Header />
+            <Routes>
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/" element={<h1>Welcome to Brain Box</h1>} />
+            </Routes>
+        </Router>
     );
 };
 

@@ -6,3 +6,20 @@
     text-align: center;
     border-radius: 5px;
 }
+
+.header nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Space between links */
+}
+
+.header a {
+    color: white; /* Link color */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Make links bold */
+    transition: color 0.3s; /* Smooth transition for hover effect */
+}
+
+.header a:hover {
+    color: #ffcc00; /* Change color on hover */
+}

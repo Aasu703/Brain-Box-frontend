@@ -1,11 +1,18 @@
+// src/components/Header.jsx
 import React from 'react';
-import './Header.css';
+import { Link } from 'react-router-dom';
+import './Header.css'; // Import the CSS file
+
 const Header = () => {
     return (
-        <div className="header">
-            <h1>Welcome to Brain Box</h1>
-            <p>Your Virtual Study Room Dashboard</p>
-        </div>
+        <header className="header">
+            <nav>
+                <Link to="/">Home</Link>
+                <Link to="/login">Login</Link>
+                <Link to="/signup">Sign Up</Link>
+                <Link to="/dashboard">Dashboard</Link>
+            </nav>
+        </header>
     );
 };
 

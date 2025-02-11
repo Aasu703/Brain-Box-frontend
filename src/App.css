@@ -2,10 +2,21 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  background-color: #f0f0f0; /* Fallback color */
 }
 
-.app {
-  display: flex;
-  height: 100vh;
+h1 {
+  text-align: center;
+  margin-top: 50px;
 }
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Optional: Add any other global styles here */

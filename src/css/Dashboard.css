@@ -1,4 +1,4 @@
-/* src/pages/Dashboard.css */
+/* src/css/Dashboard.css */
 .dashboard {
     display: flex;
 }
@@ -6,10 +6,74 @@
 .main-content {
     flex: 1;
     padding: 20px;
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
 }
 
 .dashboard-content {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    display: grid; /* Use grid for layout */
+    grid-template-columns: 1fr 1fr; /* Two columns */
+    gap: 20px; /* Space between components */
+}
+
+.start-meeting-button {
+    background-color: #4e4eff; /* Primary color */
+    color: white; /* Text color */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px; /* Space above the button */
+    grid-column: span 2; /* Make the button span across both columns */
+}
+
+.start-meeting-button:hover {
+    background-color: #3a3ab8; /* Darker shade on hover */
+}
+
+.video-call {
+    grid-column: span 2; /* Make the video call area span across both columns */
+    margin-top: 20px; /* Space above the video call */
+    display: flex; /* Flex display for video elements */
+    justify-content: space-between; /* Space between local and remote videos */
+}
+
+.video-call video {
+    width: 45%; /* Adjust width for local and remote videos */
+    border: 1px solid #ccc; /* Optional border */
+    border-radius: 8px; /* Optional rounded corners */
+}
+
+@media (max-width: 768px) {
+    .dashboard-content {
+        grid-template-columns: 1fr; /* Stack components on small screens */
+    }
+
+    .start-meeting-button {
+        width: 100%; /* Full width on small screens */
+    }
+
+    .video-call {
+        flex-direction: column; /* Stack videos vertically on small screens */
+    }
+
+    .video-call video {
+        width: 100%; /* Full width for videos on small screens */
+        margin-bottom: 10px; /* Space below each video */
+    }
+}
+.stop-meeting-button {
+    background-color: #ff4e4e; /* Red color for stop */
+    color: white; /* Text color */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px; /* Space above the button */
+}
+
+.stop-meeting-button:hover {
+    background-color: #c63939; /* Darker shade on hover */
 }

@@ -1,79 +1,128 @@
-/* src/css/Dashboard.css */
+/* General Layout */
 .dashboard {
     display: flex;
+    background-color: #f8f9fa; /* Light gray background */
+    height: 100vh;
+    color: #333;
 }
 
 .main-content {
     flex: 1;
-    padding: 20px;
+    padding: 24px;
     display: flex;
-    flex-direction: column; /* Stack children vertically */
+    flex-direction: column;
+    gap: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 20px;
 }
 
+/* Grid Layout */
 .dashboard-content {
-    display: grid; /* Use grid for layout */
-    grid-template-columns: 1fr 1fr; /* Two columns */
-    gap: 20px; /* Space between components */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.left-panel, .right-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Start & Stop Meeting Buttons */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.start-meeting-button, .stop-meeting-button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .start-meeting-button {
-    background-color: #4e4eff; /* Primary color */
-    color: white; /* Text color */
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-top: 20px; /* Space above the button */
-    grid-column: span 2; /* Make the button span across both columns */
+    background: linear-gradient(135deg, #4e8cff, #007bff);
+    color: white;
 }
 
 .start-meeting-button:hover {
-    background-color: #3a3ab8; /* Darker shade on hover */
+    background: linear-gradient(135deg, #3a75d1, #0056b3);
+    transform: translateY(-2px);
 }
 
-.video-call {
-    grid-column: span 2; /* Make the video call area span across both columns */
-    margin-top: 20px; /* Space above the video call */
-    display: flex; /* Flex display for video elements */
-    justify-content: space-between; /* Space between local and remote videos */
-}
-
-.video-call video {
-    width: 45%; /* Adjust width for local and remote videos */
-    border: 1px solid #ccc; /* Optional border */
-    border-radius: 8px; /* Optional rounded corners */
-}
-
-@media (max-width: 768px) {
-    .dashboard-content {
-        grid-template-columns: 1fr; /* Stack components on small screens */
-    }
-
-    .start-meeting-button {
-        width: 100%; /* Full width on small screens */
-    }
-
-    .video-call {
-        flex-direction: column; /* Stack videos vertically on small screens */
-    }
-
-    .video-call video {
-        width: 100%; /* Full width for videos on small screens */
-        margin-bottom: 10px; /* Space below each video */
-    }
-}
 .stop-meeting-button {
-    background-color: #ff4e4e; /* Red color for stop */
-    color: white; /* Text color */
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-top: 20px; /* Space above the button */
+    background: linear-gradient(135deg, #ff4e4e, #d32f2f);
+    color: white;
 }
 
 .stop-meeting-button:hover {
-    background-color: #c63939; /* Darker shade on hover */
+    background: linear-gradient(135deg, #c62828, #b71c1c);
+    transform: translateY(-2px);
+}
+
+/* Video Call Styling */
+.video-call {
+    grid-column: span 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    background: white;
+    margin-top: 20px;
+}
+
+.video-call video {
+    width: 48%;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+}
+
+.video-call video:hover {
+    transform: scale(1.02);
+}
+
+/* Chat Box */
+.chat {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    height: 400px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-content {
+        grid-template-columns: 1fr;
+    }
+
+    .start-meeting-button, .stop-meeting-button {
+        width: 100%;
+    }
+
+    .video-call {
+        flex-direction: column;
+    }
+
+    .video-call video {
+        width: 100%;
+        margin-bottom: 10px;
+    }
 }

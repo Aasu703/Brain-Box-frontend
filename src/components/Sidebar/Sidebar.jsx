@@ -11,6 +11,8 @@ const Sidebar = () => {
                 <Link to="/messages">Messages</Link>
                 <Link to="/calendar">Calendar</Link>
                 <Link to="/settings">Settings</Link>
+                <Link to="/chat">Chat</Link> {/* Add chat link here */}
+                
                 {/* Add more links as needed */}
             </nav>
         </div>

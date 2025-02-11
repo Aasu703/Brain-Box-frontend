@@ -1,0 +1,20 @@
+/* src/components/Calendar.css */
+.calendar {
+    background-color: #fff; /* Background color */
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 columns for days of the week */
+    gap: 5px; /* Space between days */
+}
+
+.calendar-day {
+    background-color: #f1f1f1; /* Day background color */
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}

@@ -6,7 +6,8 @@ import './Header.css'; // Import the CSS file
 const Header = () => {
     return (
         <header className="header">
-            <nav>
+            <h1 className="header-title">Virtual Study Room</h1>
+            <nav className="header-nav">
                 <Link to="/">Home</Link>
                 <Link to="/login">Login</Link>
                 <Link to="/signup">Sign Up</Link>

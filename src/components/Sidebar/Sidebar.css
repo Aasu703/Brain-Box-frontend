@@ -1,20 +1,24 @@
 /* src/components/Sidebar.css */
 .sidebar {
-    width: 200px;
-    background-color: #2a2a3d;
-    color: white;
+    width: 250px;
+    background-color: #4e4eff; /* Sidebar background color */
+    color: white; /* Text color */
     padding: 20px;
+    height: 100vh; /* Full height */
 }
 
-.sidebar h3 {
-    margin: 0;
+.sidebar nav {
+    display: flex;
+    flex-direction: column; /* Stack links vertically */
 }
 
-.sidebar ul {
-    list-style-type: none;
-    padding: 0;
+.sidebar a {
+    color: white;
+    margin: 10px 0; /* Space between links */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s; /* Smooth color transition */
 }
 
-.sidebar li {
-    margin: 10px 0;
+.sidebar a:hover {
+    color: #ffcc00; /* Change color on hover */
 }

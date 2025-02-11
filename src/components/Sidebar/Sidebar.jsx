@@ -1,16 +1,18 @@
+// src/components/Sidebar.jsx
 import React from 'react';
-import './Sidebar.css';
+import { Link } from 'react-router-dom';
+import './Sidebar.css'; // Import Sidebar styles
+
 const Sidebar = () => {
     return (
         <div className="sidebar">
-            <h2>Brain Box</h2>
-            <ul>
-                <li>Dashboard</li>
-                <li>Chat</li>
-                <li>Video Calls</li>
-                <li>File Sharing</li>
-                <li>Settings</li>
-            </ul>
+            <h2>Dashboard</h2>
+            <nav>
+                <Link to="/messages">Messages</Link>
+                <Link to="/calendar">Calendar</Link>
+                <Link to="/settings">Settings</Link>
+                {/* Add more links as needed */}
+            </nav>
         </div>
     );
 };

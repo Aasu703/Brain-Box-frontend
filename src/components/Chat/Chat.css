@@ -1,7 +1,49 @@
-/* src/components/ChatRoom.css */
-.chat-room {
-    background-color: #fff;
-    border-radius: 5px;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+/* src/components/Chat.css */
+.chat {
+    background-color: #f9f9f9; /* Background color */
+    border-radius: 8px;
+    padding: 15px;
+    height: 400px; /* Fixed height */
+    display: flex;
+    flex-direction: column; /* Stack messages and input */
+}
+
+.chat-window {
+    flex: 1; /* Take available space */
+    overflow-y: auto; /* Scroll if necessary */
+    margin-bottom: 10px;
+}
+
+.chat-message {
+    margin: 5px 0; /* Space between messages */
+}
+
+.chat-message.You {
+    text-align: right; /* Align user messages to the right */
+    color: blue; /* User message color */
+}
+
+.chat-input {
+    display: flex; /* Flexbox for input */
+}
+
+.chat-input input {
+    flex: 1; /* Take available space */
+    padding: 10px;
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 4px; /* Rounded corners */
+}
+
+.chat-input button {
+    padding: 10px;
+    margin-left: 5px;
+    background-color: #4e4eff; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
+}
+
+.chat-input button:hover {
+    background-color: #3a3ab8; /* Darker shade on hover */
 }

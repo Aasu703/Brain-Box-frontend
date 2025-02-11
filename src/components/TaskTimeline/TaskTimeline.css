@@ -1,0 +1,16 @@
+/* src/components/TaskTimeline.css */
+.task-timeline {
+    background-color: #fff; /* Background color */
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+}
+
+.task-timeline ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
+}
+
+.task-timeline li {
+    margin: 10px 0; /* Space between tasks */
+}

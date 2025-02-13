@@ -1,12 +1,15 @@
-// src/components/Header.jsx
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './Header.css'; // Import the CSS file
+import React from "react";
+import { Link } from "react-router-dom";
+import "./Header.css"; // Import the CSS file
+import { FaBookOpen } from "react-icons/fa"; // Import an icon for a modern look
 
 const Header = () => {
     return (
         <header className="header">
-            <h1 className="header-title">Virtual Study Room</h1>
+            <div className="header-logo">
+                <FaBookOpen className="logo-icon" />
+                <h1 className="header-title">Virtual Study Room</h1>
+            </div>
             <nav className="header-nav">
                 <Link to="/">Home</Link>
                 <Link to="/login">Login</Link>

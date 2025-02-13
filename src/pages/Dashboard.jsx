@@ -1,3 +1,4 @@
+// src/pages/Dashboard.jsx
 import React, { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar/Sidebar";
 import Header from "../components/Header/Header";
@@ -7,18 +8,12 @@ import TaskTimeline from "../components/TaskTimeline/TaskTimeline";
 import Calendar from "../components/Calendar/Calendar";
 import Chat from "../components/Chat/Chat";
 import VideoCall from "../components/VideoCall/VideoCall";
+import { useAuth } from '../context/AuthContext';
 import "../css/Dashboard.css";
 
 const Dashboard = () => {
     const [isVideoCallActive, setIsVideoCallActive] = useState(false);
-    const [user, setUser] = useState(null);
-
-    useEffect(() => {
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-            setUser(JSON.parse(storedUser));
-        }
-    }, []);
+    const { user, logout } = useAuth();
 
     const toggleVideoCall = () => {
         setIsVideoCallActive(!isVideoCallActive);

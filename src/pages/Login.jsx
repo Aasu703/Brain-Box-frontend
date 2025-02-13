@@ -1,13 +1,15 @@
+// src/pages/Login.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../services/api';
+import { useAuth } from '../context/AuthContext';  // ✅ Use useAuth instead of useContext
 import '../css/Auth.css';
-import { jwtDecode } from 'jwt-decode'; 
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
+    const { login: authLogin } = useAuth();  // ✅ Use useAuth() instead of useContext
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
@@ -15,14 +17,9 @@ const Login = () => {
         try {
             const userData = { Email: email, Password: password };
             const response = await login(userData);
-
-            // Save token & decode user info
-            localStorage.setItem('token', response.token);
-            const decodedUser = jwtDecode(response.token);
-            localStorage.setItem('user', JSON.stringify(decodedUser));
-
+            authLogin(response.token);
             setMessage('Login successful!');
-            navigate('/dashboard'); // Redirect to Dashboard
+            navigate('/dashboard');
         } catch (error) {
             setMessage(error.response?.data?.error || 'Login failed');
         }

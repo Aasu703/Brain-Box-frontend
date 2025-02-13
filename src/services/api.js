@@ -1,24 +1,43 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api'; // Update with your backend URL
-const AI_API_URL = 'https://api.openai.com/v1/chat/completions'; // OpenAI API URL
-const AI_API_KEY = 'YOUR_OPENAI_API_KEY'; // Replace with your actual API key
+const API_URL = 'http://localhost:5000/api'; // Ensure this matches your backend
+const AI_API_URL = 'https://api.openai.com/v1/chat/completions';
 
+// Store API key in environment variables for security
+const AI_API_KEY = process.env.REACT_APP_OPENAI_API_KEY; // Ensure you have this set
+
+// Signup API call
 export const signup = async (userData) => {
-    const response = await axios.post(`${API_URL}/signup`, userData);
-    return response.data;
+    try {
+        const response = await axios.post(`${API_URL}/signup`, userData);
+        return response.data;
+    } catch (error) {
+        console.error("Signup error:", error.response?.data || error.message);
+        throw new Error(error.response?.data?.message || "Signup failed");
+    }
 };
 
+// Login API call
 export const login = async (userData) => {
-    const response = await axios.post(`${API_URL}/login`, userData);
-    return response.data;
+    try {
+        const response = await axios.post(`${API_URL}/login`, userData);
+        return response.data;
+    } catch (error) {
+        console.error("Login error:", error.response?.data || error.message);
+        throw new Error(error.response?.data?.message || "Login failed");
+    }
 };
 
-// New function to get AI response
+// Function to get AI response
 export const getAIResponse = async (userInput) => {
+    if (!AI_API_KEY) {
+        console.error("Missing OpenAI API key!");
+        return "AI service is currently unavailable.";
+    }
+
     try {
         const response = await axios.post(AI_API_URL, {
-            model: 'gpt-3.5-turbo', // Specify the model you want to use
+            model: 'gpt-3.5-turbo', // Change if using a different model
             messages: [{ role: 'user', content: userInput }],
         }, {
             headers: {
@@ -27,10 +46,9 @@ export const getAIResponse = async (userInput) => {
             },
         });
 
-        // Return the AI response
         return response.data.choices[0].message.content;
     } catch (error) {
-        console.error("Error fetching AI response:", error);
+        console.error("Error fetching AI response:", error.response?.data || error.message);
         return "I'm having trouble connecting to the AI service.";
     }
 };

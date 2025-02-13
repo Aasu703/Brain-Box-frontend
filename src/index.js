@@ -1,7 +1,7 @@
-// src/index.js
 import React from 'react';
-import ReactDOM from 'react-dom/client'; // Updated import for React 18
+import ReactDOM from 'react-dom/client';
 import App from './App';
+import './css/Auth.css'; // Import styles
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

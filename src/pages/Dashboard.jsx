@@ -1,12 +1,11 @@
-// src/pages/Dashboard.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Sidebar from "../components/Sidebar/Sidebar";
 import Header from "../components/Header/Header";
 import TodayTasks from "../components/TodayTasks/TodayTasks";
 import TaskProgress from "../components/TaskProgress/TaskProgress";
 import TaskTimeline from "../components/TaskTimeline/TaskTimeline";
 import Calendar from "../components/Calendar/Calendar";
-import Chat from "../components/Chat/Chat";
+import ChatBot from "../components/Chat/ChatBot"; // Updated import for unified ChatBot
 import VideoCall from "../components/VideoCall/VideoCall";
 import { useAuth } from '../context/AuthContext';
 import "../css/Dashboard.css";
@@ -16,7 +15,7 @@ const Dashboard = () => {
     const { user, logout } = useAuth();
 
     const toggleVideoCall = () => {
-        setIsVideoCallActive(!isVideoCallActive);
+        setIsVideoCallActive((prev) => !prev);
     };
 
     return (
@@ -43,14 +42,19 @@ const Dashboard = () => {
                 </div>
 
                 <div className="action-buttons">
-                    <button onClick={toggleVideoCall} className={isVideoCallActive ? "stop-meeting-button" : "start-meeting-button"}>
+                    <button
+                        onClick={toggleVideoCall}
+                        className={`meeting-button ${isVideoCallActive ? "stop-meeting-button" : "start-meeting-button"}`}
+                    >
                         {isVideoCallActive ? "Stop Meeting" : "Start Meeting"}
                     </button>
                 </div>
 
-                {isVideoCallActive && <VideoCall stopCall={toggleVideoCall} />} 
+                {isVideoCallActive && <VideoCall stopCall={toggleVideoCall} />}
 
-                <Chat />
+                <div className="chat-section">
+                    <ChatBot /> {/* Integrated ChatBot component here */}
+                </div>
             </div>
         </div>
     );

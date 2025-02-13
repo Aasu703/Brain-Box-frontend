@@ -1,90 +1,57 @@
-/* General Layout */
 .dashboard {
     display: flex;
-    background-color: #e9ecef; /* Light gray background */
     height: 100vh;
-    color: #333;
 }
 
 .main-content {
-    flex: 1;
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    background-color: #ffffff; /* White background */
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    margin: 20px;
+    flex-grow: 1;
+    padding: 20px;
+    background: #f4f4f4;
+    overflow-y: auto;
 }
 
-/* Grid Layout */
 .dashboard-content {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 .left-panel, .right-panel {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-/* User Info */
-.user-info {
-    text-align: center;
-    font-weight: bold;
-    font-size: 1.5em;
-}
-
-/* Start & Stop Meeting Buttons */
-.action-buttons {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.start-meeting-button, .stop-meeting-button {
-    padding: 12px 24px;
-    border: none;
+    width: 48%;
+    background: #e9ecef;
     border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.action-buttons {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.meeting-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    transition: all 0.3s ease-in-out;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    font-size: 1em;
+    transition: background 0.3s ease;
 }
 
 .start-meeting-button {
-    background: linear-gradient(135deg, #4e8cff, #007bff);
+    background: #5a8dee;
     color: white;
-}
-
-.start-meeting-button:hover {
-    background: linear-gradient(135deg, #3a75d1, #0056b3);
-    transform: translateY(-2px);
 }
 
 .stop-meeting-button {
-    background: linear-gradient(135deg, #ff4e4e, #d32f2f);
+    background: #ff4d4d;
     color: white;
 }
 
-.stop-meeting-button:hover {
-    background: linear-gradient(135deg, #c62828, #b71c1c);
-    transform: translateY(-2px);
+.meeting-button:hover {
+    opacity: 0.9;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .dashboard-content {
-        grid-template-columns: 1fr;
-    }
-
-    .action-buttons {
-        flex-direction: column;
-    }
+.chat-section {
+    margin-top: 20px; /* Add some space before the chat section */
 }

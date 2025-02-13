@@ -1,17 +1,14 @@
-// src/components/TodayTasks.jsx
-import React from 'react';
-import './TodayTasks.css';
+import React from "react";
 
 const TodayTasks = () => {
     return (
         <div className="today-tasks">
-            <h2>Today's Tasks</h2>
+            <h3>Today's Tasks</h3>
             <ul>
-                <li>Delivery App Kit</li>
-                <li>Dribbble Shot</li>
-                {/* Add more tasks dynamically */}
+                <li>Task 1</li>
+                <li>Task 2</li>
+                <li>Task 3</li>
             </ul>
-            <button>View All Tasks</button>
         </div>
     );
 };

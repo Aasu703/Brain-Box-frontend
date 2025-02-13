@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaPaperPlane } from "react-icons/fa";
-import { getAIResponse } from '../services/api'; // Import the AI response function
+import "./Chat.css"; // Ensure your CSS file is imported
+import { getAIResponse } from '../../services/api'; // Adjusted path
 
 const ChatBot = () => {
     const [messages, setMessages] = useState([]);
@@ -28,7 +29,7 @@ const ChatBot = () => {
             <div className="chat-window" ref={chatWindowRef}>
                 {messages.map((msg, index) => (
                     <div key={index} className={`chat-message ${msg.sender}`}>
-                        <span>{msg.text}</span>
+                        <span>{msg.sender === "user" ? "You: " : "Bot: "}{msg.text}</span>
                     </div>
                 ))}
             </div>

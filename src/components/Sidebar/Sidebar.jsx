@@ -1,17 +1,23 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './Sidebar.css'; // Import Sidebar styles
+import React from "react";
+import { NavLink } from "react-router-dom";
+import "./Sidebar.css";
 
 const Sidebar = () => {
+    const openMeeting = () => {
+        window.open("/video-call", "_blank"); // Open video call in a new window
+    };
+
     return (
         <div className="sidebar">
             <h2>Dashboard</h2>
             <nav>
-                <Link to="/messages">Messages</Link>
-                <Link to="/calendar">Calendar</Link>
-                <Link to="/settings">Settings</Link>
-                <Link to="/chat">Chat</Link> {/* Chat link */}
-                {/* Add more links as needed */}
+                <NavLink to="/tasks">Tasks</NavLink>
+                <NavLink to="/progress">Progress</NavLink>
+                <NavLink to="/timeline">Timeline</NavLink>
+                <NavLink to="/calendar">Calendar</NavLink>
+                <button onClick={openMeeting} className="meeting-button">
+                    Start Meeting
+                </button>
             </nav>
         </div>
     );

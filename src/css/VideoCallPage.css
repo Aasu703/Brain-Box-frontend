@@ -1,0 +1,56 @@
+.video-call-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+.video-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.local-video {
+    width: 300px;
+    height: auto;
+    border: 2px solid #0078d4;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 2; /* Bring local video above remote */
+}
+
+.remote-video {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border: 2px solid #0078d4;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+}
+
+.end-call-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.end-call-button:hover {
+    background-color: #e60000;
+}

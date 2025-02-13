@@ -1,57 +1,46 @@
 .dashboard {
     display: flex;
-    height: 100vh;
 }
 
 .main-content {
-    flex-grow: 1;
+    flex: 1;
     padding: 20px;
-    background: #f4f4f4;
-    overflow-y: auto;
+    background-color: #f4f4f4; /* Light background for contrast */
+}
+
+.user-info {
+    margin-bottom: 20px;
 }
 
 .dashboard-content {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
 }
 
 .left-panel, .right-panel {
-    width: 48%;
-    background: #e9ecef;
-    border-radius: 8px;
+    width: 45%;
+}
+
+.video-call-section {
+    margin-top: 20px;
     padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.action-buttons {
+    background-color: #ffffff; /* White background for visibility */
+    border: 1px solid #0078d4;
+    border-radius: 8px;
     text-align: center;
-    margin: 20px 0;
-}
-
-.meeting-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background 0.3s ease;
 }
 
 .start-meeting-button {
-    background: #5a8dee;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #0078d4;
     color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
 }
 
-.stop-meeting-button {
-    background: #ff4d4d;
-    color: white;
-}
-
-.meeting-button:hover {
-    opacity: 0.9;
-}
-
-.chat-section {
-    margin-top: 20px; /* Add some space before the chat section */
+.start-meeting-button:hover {
+    background-color: #0056a3; /* Darker shade on hover */
 }

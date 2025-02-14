@@ -1,6 +1,5 @@
-// src/context/AuthContext.jsx
 import { createContext, useState, useEffect, useContext } from "react";
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from "jwt-decode"; // ✅ Correct import
 
 export const AuthContext = createContext();
 
@@ -11,7 +10,7 @@ export const AuthProvider = ({ children }) => {
         const token = localStorage.getItem('token');
         if (token) {
             try {
-                const decodedUser = jwtDecode(token);
+                const decodedUser = jwtDecode(token); // ✅ Use named import
                 setUser(decodedUser);
             } catch (error) {
                 console.error("Invalid token:", error);
@@ -23,7 +22,7 @@ export const AuthProvider = ({ children }) => {
     const login = (token) => {
         localStorage.setItem('token', token);
         try {
-            const decodedUser = jwtDecode(token);
+            const decodedUser = jwtDecode(token); // ✅ Use named import
             setUser(decodedUser);
         } catch (error) {
             console.error("Invalid token:", error);
@@ -42,7 +41,7 @@ export const AuthProvider = ({ children }) => {
     );
 };
 
-// ✅ Fix: Add validation inside useAuth()
+// ✅ Ensure useAuth() is used inside an AuthProvider
 export const useAuth = () => {
     const context = useContext(AuthContext);
     if (!context) {

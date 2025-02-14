@@ -1,22 +1,26 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import "../css/VideoCallPage.css"; // Import CSS for better styling
 
 const VideoCallPage = () => {
     const localVideoRef = useRef(null);
     const remoteVideoRef = useRef(null);
-    let localStream;
+    const [localStream, setLocalStream] = useState(null);
+    const [isMuted, setIsMuted] = useState(false);
+    const [isVideoOff, setIsVideoOff] = useState(false);
 
     useEffect(() => {
         const startCall = async () => {
             try {
-                localStream = await navigator.mediaDevices.getUserMedia({
+                const stream = await navigator.mediaDevices.getUserMedia({
                     video: true,
                     audio: true,
                 });
-                localVideoRef.current.srcObject = localStream;
-
-                // Here, you would typically connect to other peers in a real application
+                setLocalStream(stream);
+                if (localVideoRef.current) {
+                    localVideoRef.current.srcObject = stream;
+                }
             } catch (error) {
-                console.error('Error accessing media devices.', error);
+                console.error('Error accessing media devices:', error);
                 alert("Permission denied. Unable to access camera and microphone.");
             }
         };
@@ -30,73 +34,60 @@ const VideoCallPage = () => {
         };
     }, []);
 
+    const toggleMute = () => {
+        if (localStream) {
+            localStream.getAudioTracks().forEach(track => {
+                track.enabled = !track.enabled;
+            });
+            setIsMuted(!isMuted);
+        }
+    };
+
+    const toggleVideo = () => {
+        if (localStream) {
+            localStream.getVideoTracks().forEach(track => {
+                track.enabled = !track.enabled;
+            });
+            setIsVideoOff(!isVideoOff);
+        }
+    };
+
     const endCall = () => {
         if (localStream) {
             localStream.getTracks().forEach(track => track.stop());
         }
-        window.close(); // Close the window after ending the call
+        window.close(); // Close the call window
     };
 
     return (
-        <div style={styles.container}>
+        <div className="video-call-container">
             <h2>Video Call</h2>
-            <div style={styles.videoGrid}>
+            <div className="video-grid">
                 <video
                     ref={localVideoRef}
                     autoPlay
                     muted
-                    style={styles.localVideo}
+                    className={`local-video ${isVideoOff ? "video-off" : ""}`}
                 />
                 <video
                     ref={remoteVideoRef}
                     autoPlay
-                    style={styles.remoteVideo}
+                    className="remote-video"
                 />
             </div>
-            <button onClick={endCall} style={styles.endCallButton}>
-                End Call
-            </button>
+            <div className="controls">
+                <button onClick={toggleMute} className="control-button">
+                    {isMuted ? "🔇 Unmute" : "🎤 Mute"}
+                </button>
+                <button onClick={toggleVideo} className="control-button">
+                    {isVideoOff ? "📹 Turn Video On" : "📷 Turn Video Off"}
+                </button>
+                <button onClick={endCall} className="end-call-button">
+                    ❌ End Call
+                </button>
+            </div>
         </div>
     );
-};
-
-const styles = {
-    container: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100vh',
-        backgroundColor: '#f0f0f0',
-    },
-    videoGrid: {
-        display: 'flex',
-        justifyContent: 'center',
-        marginBottom: '20px',
-    },
-    localVideo: {
-        width: '300px',
-        height: 'auto',
-        border: '2px solid #0078d4',
-        borderRadius: '8px',
-        marginRight: '10px',
-    },
-    remoteVideo: {
-        width: '600px',
-        height: 'auto',
-        border: '2px solid #0078d4',
-        borderRadius: '8px',
-    },
-    endCallButton: {
-        padding: '10px 20px',
-        fontSize: '16px',
-        backgroundColor: '#ff4d4d',
-        color: 'white',
-        border: 'none',
-        borderRadius: '5px',
-        cursor: 'pointer',
-        transition: 'background-color 0.3s',
-    },
 };
 
 export default VideoCallPage;

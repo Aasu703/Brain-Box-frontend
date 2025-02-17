@@ -99,3 +99,11 @@ body {
         font-size: 1.5em;
     }
 }
+.user-type-selection {
+    margin: 15px 0;
+}
+
+.user-type-selection label {
+    display: block;
+    margin: 5px 0;
+}

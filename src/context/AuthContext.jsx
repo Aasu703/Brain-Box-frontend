@@ -1,51 +1,28 @@
-import { createContext, useState, useEffect, useContext } from "react";
-import { jwtDecode } from "jwt-decode"; // ✅ Correct import
+import React, { createContext, useContext, useState } from 'react';
 
-export const AuthContext = createContext();
+// Create the AuthContext
+const AuthContext = createContext();
 
+// AuthProvider component
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            try {
-                const decodedUser = jwtDecode(token); // ✅ Use named import
-                setUser(decodedUser);
-            } catch (error) {
-                console.error("Invalid token:", error);
-                localStorage.removeItem("token");
-            }
-        }
-    }, []);
-
-    const login = (token) => {
-        localStorage.setItem('token', token);
-        try {
-            const decodedUser = jwtDecode(token); // ✅ Use named import
-            setUser(decodedUser);
-        } catch (error) {
-            console.error("Invalid token:", error);
-        }
-    };
-
-    const logout = () => {
-        localStorage.removeItem('token');
-        setUser(null);
+    // Define the login function
+    const login = (userData, token) => {
+        setUser({ ...userData, token }); // Store user data in context
+        localStorage.setItem('userToken', token); // Optional: Store token if needed
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, logout }}>
+        <AuthContext.Provider value={{ user, login, setUser }}>
             {children}
         </AuthContext.Provider>
     );
 };
 
-// ✅ Ensure useAuth() is used inside an AuthProvider
+// Custom hook to use the AuthContext
 export const useAuth = () => {
-    const context = useContext(AuthContext);
-    if (!context) {
-        throw new Error("useAuth must be used within an AuthProvider");
-    }
-    return context;
+    return useContext(AuthContext);
 };
+
+export default AuthContext;

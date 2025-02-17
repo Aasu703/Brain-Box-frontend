@@ -1,34 +1,58 @@
-import React, { useState } from "react";
+import { useState, useContext } from "react";
+import { loginUser } from "../services/api"; // Ensure this function is correctly defined
 import { useNavigate } from "react-router-dom";
-import { login } from "../services/api";
-import { useAuth } from "../context/AuthContext";
-import '../css/Auth.css';
+import AuthContext from "../context/AuthContext";
+import "../css/Auth.css";
 
 const Login = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const { login: authLogin } = useAuth();
+    const [userData, setUserData] = useState({ email: "", password: "" });
+    const [error, setError] = useState("");
     const navigate = useNavigate();
+    const { login } = useContext(AuthContext); // Ensure login is defined
 
-    const handleLogin = async (e) => {
+    const handleChange = (e) => {
+        setUserData({ ...userData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setError("");
+
         try {
-            const response = await login({ email, password });
-            authLogin(response.token);
-            navigate("/dashboard");
-        } catch (error) {
-            alert(error.message);
+            const res = await loginUser(userData); // Make sure this returns the expected format
+            login(res.user, res.token); // Call login function from context
+            alert("Login Successful!");
+            navigate("/dashboard"); // Redirect to dashboard
+        } catch (err) {
+            setError(err.message || "Login failed. Try again.");
         }
     };
 
     return (
-        <div>
-            <h2>Login</h2>
-            <form onSubmit={handleLogin}>
-                <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                <button type="submit">Login</button>
-            </form>
+        <div className="auth-container">
+            <div className="auth-box">
+                <h2 className="auth-title">Login</h2>
+                {error && <p className="auth-message">{error}</p>}
+                <form className="auth-form" onSubmit={handleSubmit}>
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        className="auth-input"
+                        onChange={handleChange}
+                        required
+                    />
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        className="auth-input"
+                        onChange={handleChange}
+                        required
+                    />
+                    <button type="submit" className="auth-button">Login</button>
+                </form>
+            </div>
         </div>
     );
 };

@@ -1,65 +1,86 @@
-// src/pages/Signup.jsx
-import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { signup } from '../services/api';
-import { AuthContext } from '../context/AuthContext';
-import '../css/Auth.css';
+import { useState } from "react";
+import { signupUser } from "../services/api";
+import { useNavigate } from "react-router-dom";
+import "../css/Auth.css"; // Assuming you have a common CSS file for auth
 
 const Signup = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [role, setRole] = useState('');
-    const [message, setMessage] = useState('');
-    const { login: authLogin } = useContext(AuthContext);
+    const [userData, setUserData] = useState({ name: "", email: "", password: "", userType: "" });
+    const [error, setError] = useState("");
     const navigate = useNavigate();
 
-    const handleSignup = async (e) => {
+    const handleChange = (e) => {
+        setUserData({ ...userData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setError(""); // Clear previous errors
+
         try {
-            const userData = { Email: email, Password: password, Role: role };
-            const response = await signup(userData);
-            authLogin(response.token);
-            setMessage(response.message);
-            navigate('/dashboard');
-        } catch (error) {
-            setMessage(error.response?.data?.error || 'Signup failed');
+            const res = await signupUser(userData);
+            alert("Signup Successful!");
+            navigate("/login"); // Redirect to login page
+        } catch (err) {
+            setError(err.message || "Signup failed. Try again.");
         }
     };
 
     return (
         <div className="auth-container">
             <div className="auth-box">
-                <h1 className="auth-title">Signup</h1>
-                <form onSubmit={handleSignup} className="auth-form">
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        className="auth-input"
+                <h2 className="auth-title">Signup</h2>
+                {error && <p className="auth-message">{error}</p>}
+                <form className="auth-form" onSubmit={handleSubmit}>
+                    <input 
+                        type="text" 
+                        name="name" 
+                        placeholder="Name" 
+                        className="auth-input" 
+                        onChange={handleChange} 
+                        required 
                     />
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                        className="auth-input"
+                    <input 
+                        type="email" 
+                        name="email" 
+                        placeholder="Email" 
+                        className="auth-input" 
+                        onChange={handleChange} 
+                        required 
                     />
-                    <select
-                        value={role}
-                        onChange={(e) => setRole(e.target.value)}
-                        required
-                        className="auth-input"
-                    >
-                        <option value="">Select Role</option>
-                        <option value="Student">Student</option>
-                        <option value="Teacher">Teacher</option>
-                    </select>
+                    <input 
+                        type="password" 
+                        name="password" 
+                        placeholder="Password" 
+                        className="auth-input" 
+                        onChange={handleChange} 
+                        required 
+                    />
+                    
+                    <div className="user-type-selection">
+                        <label>
+                            <input 
+                                type="radio" 
+                                name="userType" 
+                                value="student" 
+                                checked={userData.userType === "student"} 
+                                onChange={handleChange} 
+                            />
+                            Student
+                        </label>
+                        <label>
+                            <input 
+                                type="radio" 
+                                name="userType" 
+                                value="teacher" 
+                                checked={userData.userType === "teacher"} 
+                                onChange={handleChange} 
+                            />
+                            Teacher
+                        </label>
+                    </div>
+
                     <button type="submit" className="auth-button">Signup</button>
                 </form>
-                {message && <p className="auth-message">{message}</p>}
             </div>
         </div>
     );

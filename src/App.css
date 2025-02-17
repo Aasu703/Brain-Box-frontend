@@ -1,22 +1,32 @@
-/* src/App.css */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0; /* Fallback color */
+  background-color: #f4f4f4;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
 }
 
 h1 {
-  text-align: center;
-  margin-top: 50px;
+  font-size: 2rem;
+  color: #333;
 }
 
-a {
-  color: #007bff;
-  text-decoration: none;
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-a:hover {
-  text-decoration: underline;
+button:hover {
+  background-color: #0056b3;
 }
-
-/* Optional: Add any other global styles here */

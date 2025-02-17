@@ -25,14 +25,18 @@ const TodayTasks = ({ tasks, addTask, deleteTask, toggleTaskCompletion }) => {
             </div>
 
             <ul className="task-list">
-                {tasks.map((task) => (
-                    <li key={task.id} className={`task-item ${task.completed ? "completed" : ""}`}>
-                        <span onClick={() => toggleTaskCompletion(task.id)}>
-                            {task.text}
-                        </span>
-                        <button className="delete-btn" onClick={() => deleteTask(task.id)}>❌</button>
-                    </li>
-                ))}
+                {tasks.length === 0 ? (
+                    <p>No tasks available.</p>
+                ) : (
+                    tasks.map((task) => (
+                        <li key={task.id} className={`task-item ${task.completed ? "completed" : ""}`}>
+                            <span onClick={() => toggleTaskCompletion(task.id)}>
+                                {task.text}
+                            </span>
+                            <button className="delete-btn" onClick={() => deleteTask(task.id)}>❌</button>
+                        </li>
+                    ))
+                )}
             </ul>
         </div>
     );

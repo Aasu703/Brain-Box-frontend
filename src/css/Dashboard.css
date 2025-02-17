@@ -1,46 +1,111 @@
+/* Dashboard Container */
 .dashboard {
     display: flex;
     height: 100vh;
-    background: #f4f6f9;
-}
-
-.main-content {
-    flex-grow: 1;
+    background: linear-gradient(135deg, #eef1f6, #dce1eb);
     padding: 20px;
 }
 
-.user-info {
-    text-align: center;
-    font-size: 20px;
-    font-weight: bold;
+/* Sidebar - Make it Slimmer */
+.sidebar {
+    width: 220px; /* Reduce width */
+    background: #1f1f1f;
+    color: white;
+    padding: 20px;
+    height: 95vh;
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
+/* Sidebar Links - Better Spacing */
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Dashboard Content */
 .dashboard-content {
+    flex: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Today's Tasks Section - Wider */
+.task-card {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow: 0px 5px 14px rgba(0, 0, 0, 0.1);
+    width: 90%; /* Increase width */
+    max-width: 900px; /* Make it spacious */
+    margin-bottom: 30px;
+}
+
+/* Task Input Field */
+.task-input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.task-input input {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #d1d9e6;
+    border-radius: 8px;
+    outline: none;
+    font-size: 18px;
+}
+
+/* Add Task Button */
+.add-task-btn {
+    background: #2575fc;
+    color: white;
+    padding: 12px 18px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* Task List */
+.task-list {
+    margin-top: 12px;
+    width: 100%;
+}
+
+.task-item {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border-radius: 8px;
+    background: #f8f9fa;
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+/* Calendar Section - More Space */
+.calendar {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 900px;
     margin-top: 20px;
 }
 
-.left-panel, .right-panel {
-    width: 48%;
-}
-
-.video-call-section {
-    text-align: center;
-    margin-top: 30px;
-}
-
-.start-meeting-button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: 0.3s;
-}
-
-.start-meeting-button:hover {
-    background-color: #0056b3;
+/* Calendar Grid */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-top: 12px;
 }

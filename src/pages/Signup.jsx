@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "../css/Auth.css"; // Assuming you have a common CSS file for auth
 
 const Signup = () => {
-    const [userData, setUserData] = useState({ name: "", email: "", password: "", userType: "" });
+    const [userData, setUserData] = useState({ name: "", email: "", password: "", role: "student" }); // Default role
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
@@ -18,8 +18,20 @@ const Signup = () => {
 
         try {
             const res = await signupUser(userData);
+            
+            // Check if the user data exists in the response
+            if (res.user) {
+                // Save user data in local storage
+                localStorage.setItem("token", res.token);
+                localStorage.setItem("userId", res.user.id);
+                localStorage.setItem("username", res.user.name);
+                localStorage.setItem("role", res.user.role);
+            } else {
+                throw new Error("User data not found in response.");
+            }
+
             alert("Signup Successful!");
-            navigate("/login"); // Redirect to login page
+            navigate("/dashboard"); // Redirect to dashboard after signup
         } catch (err) {
             setError(err.message || "Signup failed. Try again.");
         }
@@ -60,9 +72,9 @@ const Signup = () => {
                         <label>
                             <input 
                                 type="radio" 
-                                name="userType" 
+                                name="role" 
                                 value="student" 
-                                checked={userData.userType === "student"} 
+                                checked={userData.role === "student"} 
                                 onChange={handleChange} 
                             />
                             Student
@@ -70,9 +82,9 @@ const Signup = () => {
                         <label>
                             <input 
                                 type="radio" 
-                                name="userType" 
+                                name="role" 
                                 value="teacher" 
-                                checked={userData.userType === "teacher"} 
+                                checked={userData.role === "teacher"} 
                                 onChange={handleChange} 
                             />
                             Teacher

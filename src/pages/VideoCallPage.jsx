@@ -3,7 +3,6 @@ import "../css/VideoCallPage.css"; // Import CSS for better styling
 
 const VideoCallPage = () => {
     const localVideoRef = useRef(null);
-    const remoteVideoRef = useRef(null);
     const [localStream, setLocalStream] = useState(null);
     const [isMuted, setIsMuted] = useState(false);
     const [isVideoOff, setIsVideoOff] = useState(false);

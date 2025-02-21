@@ -1,7 +1,7 @@
 import React from 'react';
 import './TaskTimeline.css';
 
-const TaskTimeline = ({ tasks = [] }) => {  // ✅ Ensure tasks is always an array
+const TaskTimeline = ({ tasks = [] }) => {
     return (
         <div className="task-timeline">
             <h2>Task Timeline</h2>
@@ -15,7 +15,6 @@ const TaskTimeline = ({ tasks = [] }) => {  // ✅ Ensure tasks is always an arr
                                 <strong>{task.text}</strong>
                                 <br />
                                 <small>🕒 Added: {task.createdAt}</small>
-
                                 {task.completed && (
                                     <>
                                         <br />

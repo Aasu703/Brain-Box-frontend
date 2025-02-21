@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Calendar.css";
 
-const Calendar = ({ tasks = [] }) => { // Default to an empty array if tasks is undefined
+const Calendar = ({ tasks = [] }) => {
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
 
@@ -34,7 +34,6 @@ const Calendar = ({ tasks = [] }) => { // Default to an empty array if tasks is 
                     const day = i + 1;
                     const formattedDate = `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
                     
-                    // Check if tasks array is defined before accessing its properties
                     const hasCreatedTasks = tasks && tasks.some(task => task.createdAt === formattedDate);
                     const hasCompletedTasks = tasks && tasks.some(task => task.completedAt === formattedDate);
 

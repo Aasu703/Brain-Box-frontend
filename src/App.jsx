@@ -16,6 +16,7 @@ const App = () => {
                     <Route path="/login" element={<Login />} />
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/video-call" element={<VideoCallPage />} /> {/* Add video call page route */}
+                    <Route path="/landing-page" element={<LandingPage />} />
                 </Routes>
             </Router>
         </AuthProvider>

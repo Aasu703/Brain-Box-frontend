@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar/Sidebar";
 import TodayTasks from "../components/TodayTasks/TodayTasks";
 import TaskProgress from "../components/TaskProgress/TaskProgress";
 import TaskTimeline from "../components/TaskTimeline/TaskTimeline";
 import Calendar from "../components/Calendar/Calendar";
 import { useAuth } from "../context/AuthContext";
+import VideoCallPage from "./VideoCallPage";
 import "../css/Dashboard.css";
 
 const Dashboard = () => {
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
+    const navigate = useNavigate();
 
     const [tasks, setTasks] = useState([
         { id: 1, text: "Sample Task 1", completed: false },
@@ -35,11 +37,16 @@ const Dashboard = () => {
         ));
     };
 
+    const handleLogout = () => {
+        logout();
+        navigate("/landing");
+    };
+
     return (
         <div className="dashboard">
             <Sidebar />
             <div className="main-content">
-                <h2>Welcome, {user ? user.Email : "Guest"}</h2>
+                <h2>Welcome, {user ? user.name : "Guest"}</h2>
                 <div className="dashboard-grid">
                     <div className="tasks-section">
                         <TodayTasks
@@ -57,13 +64,18 @@ const Dashboard = () => {
                 </div>
                 <div className="video-call-section">
                     <h2>Start a Meeting</h2>
-                    <button onClick={() => window.open("/video-call", "_blank")}>
+                    <button onClick={() => window.open(VideoCallPage)}>
                         Start Meeting
                     </button>
                 </div>
-                <Link to="/landing" className="home-button">
-    Home
-</Link>
+                <div className="logout-section">
+                    <button onClick={handleLogout} className="logout-button">
+                        Logout
+                    </button>
+                </div>
+                <Link to="/landing-page" className="home-button">
+                    Home
+                </Link>
             </div>
         </div>
     );

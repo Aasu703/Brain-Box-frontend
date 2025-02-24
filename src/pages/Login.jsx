@@ -21,13 +21,7 @@ const Login = () => {
         try {
             const res = await loginUser(userData); // Make sure this returns the expected format
             
-            // Save user data in local storage
-            localStorage.setItem("token", res.token);
-            localStorage.setItem("userId", res.user.id);
-            localStorage.setItem("username", res.user.name);
-            localStorage.setItem("role", res.user.role);
-
-            // Call login function from context
+            // Call login function from context with the user object and token
             login(res.user, res.token); 
             alert("Login Successful!");
             navigate("/dashboard"); // Redirect to dashboard

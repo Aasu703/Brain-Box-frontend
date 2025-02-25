@@ -219,3 +219,43 @@ h2, h3 {
     color: #333;
     margin-bottom: 15px;
 }
+/* ... (existing CSS remains unchanged) ... */
+
+/* Chat Section Styling */
+.chat-section {
+    margin-top: 30px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.chat-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.chat-section h2 {
+    color: #4b0082;
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.chat-section .section-icon {
+    color: #4b0082;
+    font-size: 1.25rem;
+}
+
+/* Ensure ChatBot styling integrates with dashboard */
+.chatbot {
+    max-width: 100%;
+    height: 400px; /* Adjust as needed */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}

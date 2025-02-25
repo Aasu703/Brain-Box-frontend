@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import "../css/VideoCallPage.css"; // Import CSS for better styling
+import React, { useRef, useState, useEffect } from "react";
+import "../css/VideoCallPage.css";
 
 const VideoCallPage = () => {
     const localVideoRef = useRef(null);
@@ -19,11 +19,10 @@ const VideoCallPage = () => {
                     localVideoRef.current.srcObject = stream;
                 }
             } catch (error) {
-                console.error('Error accessing media devices:', error);
+                console.error("Error accessing media devices:", error);
                 alert("Permission denied. Unable to access camera and microphone.");
             }
         };
-
         startCall();
 
         return () => {
@@ -65,11 +64,12 @@ const VideoCallPage = () => {
                 <video
                     ref={localVideoRef}
                     autoPlay
-                    muted
+                    muted={true}
                     className={`local-video ${isVideoOff ? "video-off" : ""}`}
                 />
+                {/* Add remote video if needed */}
                 <video
-                    ref={remoteVideoRef}
+                    ref={remoteVideoRef} // Ensure remoteVideoRef is defined
                     autoPlay
                     className="remote-video"
                 />

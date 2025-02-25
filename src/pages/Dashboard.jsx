@@ -7,6 +7,8 @@ import TaskTimeline from "../components/TaskTimeline/TaskTimeline";
 import Calendar from "../components/Calendar/Calendar";
 import { useAuth } from "../context/AuthContext";
 import VideoCallPage from "./VideoCallPage";
+// Import icons from react-icons (install with: npm install react-icons)
+import { FaUser, FaTasks, FaChartBar, FaCalendarAlt, FaVideo, FaSignOutAlt, FaHome } from "react-icons/fa";
 import "../css/Dashboard.css";
 
 const Dashboard = () => {
@@ -39,14 +41,17 @@ const Dashboard = () => {
 
     const handleLogout = () => {
         logout();
-        navigate("/landing");
+        navigate("/landing-page");
     };
 
     return (
         <div className="dashboard">
             <Sidebar />
             <div className="main-content">
-                <h2>Welcome, {user ? user.name : "Guest"}</h2>
+                <div className="welcome-header">
+                    <FaUser className="welcome-icon" />
+                    <h2>Welcome, {user ? user.name : "Guest"}</h2>
+                </div>
                 <div className="dashboard-grid">
                     <div className="tasks-section">
                         <TodayTasks
@@ -63,19 +68,19 @@ const Dashboard = () => {
                     </div>
                 </div>
                 <div className="video-call-section">
-                    <h2>Start a Meeting</h2>
-                    <button onClick={() => window.open(VideoCallPage)}>
+                    <h2 className="section-title">Start a Meeting <FaVideo className="section-icon" /></h2>
+                    <button onClick={() => window.open("/video-call", "_blank")} className="meeting-button">
                         Start Meeting
                     </button>
                 </div>
-                <div className="logout-section">
+                <div className="action-buttons">
                     <button onClick={handleLogout} className="logout-button">
-                        Logout
+                        <FaSignOutAlt className="button-icon" /> Logout
                     </button>
+                    <Link to="/landing-page" className="home-button">
+                        <FaHome className="button-icon" /> Home
+                    </Link>
                 </div>
-                <Link to="/landing-page" className="home-button">
-                    Home
-                </Link>
             </div>
         </div>
     );
